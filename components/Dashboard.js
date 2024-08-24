@@ -50,17 +50,12 @@ export default function Dashboard() {
       // Update the current state
       setData(newData)
       
-      // Update the global state
-      setUserDataObj(newData)
-  
-      // Update Firebase
-      const docRef = doc(db, 'users', currentUser.uid)
-      await setDoc(docRef, newData, { merge: true })
+      // Update the global state and Firebase
+      await updateUserData(newData)
     } catch (err) {
       console.log('Failed to set data: ', err.message)
     }
   }
-
 
   const moods = {
     'Tender and Drained': '😭',
