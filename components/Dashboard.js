@@ -40,35 +40,26 @@ export default function Dashboard() {
     const day = now.getDate()
     const month = now.getMonth()
     const year = now.getFullYear()
-
+  
     try {
       const newData = { ...userDataObj }
-      if (!newData?.[year]) {
-        newData[year] = {}
-      }
-      if (!newData?.[year]?.[month]) {
-        newData[year][month] = {}
-      }
-
+      if (!newData[year]) newData[year] = {}
+      if (!newData[year][month]) newData[year][month] = {}
       newData[year][month][day] = mood
-      // update the current state
+  
+      // Update the current state
       setData(newData)
-      // update the global state
+      
+      // Update the global state
       setUserDataObj(newData)
-      // update firebase
+  
+      // Update Firebase
       const docRef = doc(db, 'users', currentUser.uid)
-      const res = await setDoc(docRef, {
-        [year]: {
-          [month]: {
-            [day]: mood
-          }
-        }
-      }, { merge: true })
+      await setDoc(docRef, newData, { merge: true })
     } catch (err) {
       console.log('Failed to set data: ', err.message)
     }
   }
-
 
 
   const moods = {
