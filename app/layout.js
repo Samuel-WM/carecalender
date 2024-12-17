@@ -9,7 +9,7 @@ const opensans = Open_Sans({ subsets: ["latin"] });
 const fugaz = Fugaz_One({ subsets: ["latin"], weight: ['400'] });
 
 export const metadata = {
-  title: "Care Calendar",
+  title: "Mental Care Calendar",
   description: "Track your daily mood every day of the year!",
 };
 

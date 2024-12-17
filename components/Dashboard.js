@@ -28,7 +28,7 @@ export default function Dashboard() {
         }
       }
     }
-    return { num_days: total_number_of_days, average_mood: sum_moods / total_number_of_days }
+    return { num_days: total_number_of_days, average_mood: (sum_moods / total_number_of_days).toFixed(2) }
   }
 
   const statuses = {
@@ -56,21 +56,25 @@ export default function Dashboard() {
       console.log('Failed to set data: ', err.message)
     }
   }
-
+ 
   const moods = {
-    'Tender and Drained': '😭',
-    'Unsteady but Hopeful': '🥲',
-    'Gaining Stability': '😶',
-    'Strength Renewing': '😊',
-    'Optimistically Active': '😍',
-  }
+    'Overwhelmed and Exhausted': '😭',
+    'Vulnerable but Resilient': '🥲',
+    'Finding Balance': '😶',
+    'Regaining Strength': '😊',
+    'Motivated and Positive': '😍',
+  };
+  
 
   useEffect(() => {
     if (!currentUser || !userDataObj) {
-      return
+      console.log('Current User:', currentUser);
+      console.log('User Data Obj:', userDataObj);
+      return;
     }
-    setData(userDataObj)
-  }, [currentUser, userDataObj])
+    console.log('Setting data from userDataObj:', userDataObj);
+    setData(userDataObj);
+  }, [currentUser, userDataObj]);
 
   if (loading) {
     return <Loading />
